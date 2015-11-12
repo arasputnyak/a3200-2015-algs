@@ -1,27 +1,25 @@
 from sys import stdin
 elem = [int(i) for i in stdin.readline().split()]
 k = 10
-def insertionsort(lst):
-    c = 0
-    for j in range(1, len(lst)):
-        i = j - 1
-        while i > -1 and lst[i] > lst[j]:
-            swap(lst, i, j)
-            c += 1
-    if c > 0:
-        insertionsort(lst)
-    return lst
-def swap(lst, i, j):
-    x = lst[i]
-    lst[i] = lst[j]
-    lst[j] = x
-def mergesort(lst):
+
+def insertion_sort(lst):
+   for i in range(len(lst)):
+       key = lst[i]
+       j = i
+       while j > 0 and lst[j - 1] > key:
+           lst[j] = lst[j - 1]
+           j -= 1
+       lst[j] = key
+   return lst
+
+def merge_sort(lst):
     if len(lst) <= 1:
         return lst
     mid = len(lst) // 2
-    left = mergesort(lst[:mid])
-    right = mergesort(lst[mid:])
+    left = merge_sort(lst[:mid])
+    right = merge_sort(lst[mid:])
     return merge(left, right)
+
 def merge(left, right):
     result = []
     while len(left) > 0 and len(right) > 0:
@@ -36,9 +34,11 @@ def merge(left, right):
     if len(right) > 0:
         result += right
     return result
-def sortirovka(lst):
+
+def sort(lst):
     if len(lst) < k:
-        return insertionsort(lst)
+        return insertion_sort(lst)
     else:
-        return mergesort(lst)
-print(sortirovka(elem))
+        return merge_sort(lst)
+
+print(sort(elem))
