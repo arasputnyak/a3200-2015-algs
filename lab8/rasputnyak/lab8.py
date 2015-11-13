@@ -61,23 +61,18 @@ class MaxElementQueue(Queue):
         print("ok")
 
     def pop(self):
+        s = self.stack_1.size()
         if self.size() > 0:
-            s = self.stack_1.size()
-            self.max = self.stack_1.pop()
-            self.stack_2.push(self.max)
-            for i in range(1, s - 1):
-                e = self.stack_1.pop()
-                self.stack_2.push(e)
-                if (e >= self.max):
-                    self.max = e
-            print(self.stack_1.pop())
+            for i in range(s):
+                self.stack_2.push(self.stack_1.pop())
+            print(self.stack_2.pop())
         else:
             print("empty")
 
     def size(self):
         return self.stack_1.size() + self.stack_2.size()
 
-    def unfinished_max(self):
+    def max_elem(self):
         if self.size() == 0:
             print("empty")
         else:
