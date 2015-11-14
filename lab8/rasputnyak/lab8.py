@@ -16,10 +16,7 @@ class Stack:
         self._stack.append(x)
 
     def pop(self):
-        a = len(self._stack) - 1
-        k = self._stack[a]
-        del self._stack[a]
-        return k
+        return self._stack.pop()
 
     def size(self):
         return len(self._stack)
@@ -35,12 +32,15 @@ class StackQueue(Queue):
 
     def pop(self):
         s = self.stack_1.size()
-        if self.size() > 0:
-            for i in range(s):
-                self.stack_2.push(self.stack_1.pop())
-            print(self.stack_2.pop())
+        if self.stack_2.size() == 0:
+            if self.size() > 0:
+                for i in range(s):
+                    self.stack_2.push(self.stack_1.pop())
+                print(self.stack_2.pop())
+            else:
+                print("empty")
         else:
-            print("empty")
+            print(self.stack_2.pop())
 
     def size(self):
         return self.stack_1.size() + self.stack_2.size()
@@ -61,13 +61,30 @@ class MaxElementQueue(Queue):
         print("ok")
 
     def pop(self):
+        lst = []
+        self.max = - (1000 ** 10)
         s = self.stack_1.size()
-        if self.size() > 0:
-            for i in range(s):
-                self.stack_2.push(self.stack_1.pop())
-            print(self.stack_2.pop())
+        if self.stack_2.size() == 0:
+            if self.size() > 0:
+                for i in range(1, s):
+                    e = self.stack_1.pop()
+                    self.stack_2.push(e)
+                    if e > self.max:
+                        self.max = e
+                print(self.stack_1.pop())
+            else:
+                print("empty")
         else:
-            print("empty")
+            print(self.stack_2.pop())
+            s = self.stack_2.size()
+            for i in range(s):
+                e = self.stack_2.pop()
+                if e > self.max:
+                    self.max = e
+                lst.append(e)
+            lst.reverse()
+            for i in range(len(lst)):
+                self.stack_2.push(lst[i])
 
     def size(self):
         return self.stack_1.size() + self.stack_2.size()
