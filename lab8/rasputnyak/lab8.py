@@ -36,11 +36,16 @@ class StackQueue(Queue):
             if self.size() > 0:
                 for i in range(s):
                     self.stack_2.push(self.stack_1.pop())
-                print(self.stack_2.pop())
+                q = self.stack_2.pop()
+                print(q)
+                return q
             else:
                 print("empty")
+                return None
         else:
-            print(self.stack_2.pop())
+            q = self.stack_2.pop()
+            print(q)
+            return q
 
     def size(self):
         return self.stack_1.size() + self.stack_2.size()
@@ -71,11 +76,15 @@ class MaxElementQueue(Queue):
                     self.stack_2.push(e)
                     if e > self.max:
                         self.max = e
-                print(self.stack_1.pop())
+                q = self.stack_1.pop()
+                print(q)
+                return q
             else:
                 print("empty")
+                return None
         else:
-            print(self.stack_2.pop())
+            q = self.stack_2.pop()
+            print(q)
             s = self.stack_2.size()
             for i in range(s):
                 e = self.stack_2.pop()
@@ -85,6 +94,7 @@ class MaxElementQueue(Queue):
             lst.reverse()
             for i in range(len(lst)):
                 self.stack_2.push(lst[i])
+            return q
 
     def size(self):
         return self.stack_1.size() + self.stack_2.size()
