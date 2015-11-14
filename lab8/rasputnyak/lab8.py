@@ -94,6 +94,7 @@ class MaxElementQueue(Queue):
             print("empty")
         else:
             print(self.max)
+            return self.max
 
 
 
