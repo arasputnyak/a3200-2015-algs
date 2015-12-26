@@ -8,6 +8,7 @@ def quicksort(lst, frst, last):
         mid = randompartition(lst, frst, last)
         quicksort(lst, frst, mid - 1)
         quicksort(lst, mid + 1, last)
+    return lst
 
 def partition(lst, frst, last):
     x = lst[last]
@@ -28,6 +29,7 @@ def swap(lst, i, j):
     x = lst[i]
     lst[i] = lst[j]
     lst[j] = x
+    return lst
 
 quicksort(elem, 0, len(elem) - 1)
 print(elem)
