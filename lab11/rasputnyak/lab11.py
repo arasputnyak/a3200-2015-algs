@@ -2,31 +2,21 @@ from sys import stdin
 from sys import stdout
 
 def area(lst):
-    lst2 = []
-    s = 0
+    ar = 0
+    max_ar = 0
     if len(lst) <= 1:
-        return s
+        return ar
     else:
         max = lst[0]
-        Maxlst = maximum(lst)
-        for i in range(1, len(lst) - 1):
-            if lst[i] < max:
-                s = s + (max - lst[i])
+        for i in range(1, len(lst)):
+            if lst[i] >= max:
+                if ar > max_ar:
+                    max_ar = ar
+                ar = 0
+                max = lst[i]
             else:
-                if lst[i] < Maxlst:
-                    max = lst[i]
-                else:
-                    max = lst[i + 1]
-                lst2.append(s)
-                s = 0
-    return maximum(lst2)
-
-def maximum(lst):
-    max = lst[0]
-    for i in range(1, len(lst)):
-        if lst[i] >= max:
-            max = lst[i]
-    return max
+                    ar += max - lst[i]
+    return max_ar
 
 if __name__ == '__main__':
     elem = [int(i) for i in stdin.readline().split()]
