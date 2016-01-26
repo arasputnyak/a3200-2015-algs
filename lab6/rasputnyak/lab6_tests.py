@@ -33,4 +33,9 @@ class TestSorting(unittest.TestCase):
         result = lab6.radix_sort(lst)
         lst.sort()
         self.assertEqual(lst, result)
+        
+    def test_negayive(self):
+        lst = [6, -34, 23, 8, -8, 0, -100]
+        result = lab6.radix_sort(lst)
+        expect = [-100, -34, -8, 0, 6, 6, 23]
 
