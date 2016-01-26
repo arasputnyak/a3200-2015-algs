@@ -1,5 +1,5 @@
 from sys import stdin
-lst = [int(i) for i in stdin.readline().split()]
+import sys
 
 def maximum(lst):
     maxx = lst[0]
@@ -20,10 +20,28 @@ def last_num(n, i):
     return x
 
 def radix_sort(lst):
-    d = number(maximum(lst))
-    for i in range(0, d):
-        lst = counting_sort(lst, i)
-    return lst
+    if not lst:
+        return []
+    negative = []
+    positive = []
+    for i in range(len(lst)):
+        if lst[i] < 0:
+            negative.append(abs(lst[i]))
+        else:
+            positive.append(lst[i])
+    p = number(maximum(positive))
+    if len(negative) != 0:
+        n = number(maximum(negative))
+    else:
+        n = 0
+    for i in range(0, p):
+        positive = counting_sort(positive, i)
+    for i in range(0, n):
+        negative = counting_sort(negative, i)
+    negative.reverse()
+    for i in range(len(negative)):
+        negative[i] *= -1
+    return negative + positive
 
 def counting_sort(lst, ind):
     k = 10
@@ -40,4 +58,8 @@ def counting_sort(lst, ind):
         j -= 1
     return lst2
 
-print(radix_sort(lst))
+if __name__ == '__main__':
+    elem = [int(i) for i in stdin.readline().split()]
+    elem = radix_sort(elem)
+    for j in elem:
+        sys.stdout.write(str(j) + ' ')
